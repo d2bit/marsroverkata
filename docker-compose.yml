@@ -1,0 +1,9 @@
+app:
+  image: ruby
+  command: bash
+  volumes:
+    - .:/app
+  working_dir: /app
+  extends:
+    file: .docker-custom.yml
+    service: custom
