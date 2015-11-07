@@ -24,4 +24,9 @@ describe MarsRover do
     @mars_rover.turn_right
     @mars_rover.heading.must_equal(Nav::S)
   end
+
+  it 'moves forward' do
+    @mars_rover.move
+    @mars_rover.current_position.must_equal(Point.new(1, 3))
+  end
 end

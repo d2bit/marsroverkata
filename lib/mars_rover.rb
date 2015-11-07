@@ -1,3 +1,5 @@
+require './lib/nav.rb'
+
 class MarsRover
   def initialize(position, heading)
     @position = position
@@ -18,5 +20,10 @@ class MarsRover
 
   def turn_right
     @heading = Nav::DIRECTIONS[(@heading + 1) % 4]
+  end
+
+  def move
+    diff = Nav::MOVES[@heading]
+    @position = Point.new(@position.x + diff[0], @position.y + diff[1])
   end
 end
