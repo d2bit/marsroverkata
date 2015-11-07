@@ -41,6 +41,10 @@ class MarsRover
     end
   end
 
+  def to_s
+    @navigator.to_s
+  end
+
   class InvalidCommandError < StandardError
   end
 end
