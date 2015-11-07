@@ -2,12 +2,14 @@ require 'minitest/autorun'
 require './lib/mars_rover.rb'
 require './lib/point.rb'
 require './lib/navigator.rb'
+require './lib/map.rb'
 
 describe MarsRover do
   before do
+    map = Map.new(Point.new(5, 5))
     @initial_position = Point.new(1, 2)
     @inicial_heading = Navigator::N
-    @subject = MarsRover.new(@initial_position, @inicial_heading)
+    @subject = MarsRover.new(map, @initial_position, @inicial_heading)
   end
 
   it 'knows its position' do

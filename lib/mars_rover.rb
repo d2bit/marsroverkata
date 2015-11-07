@@ -1,8 +1,8 @@
 require './lib/navigator.rb'
 
 class MarsRover
-  def initialize(position, heading)
-    @navigator = Navigator.new(position, heading)
+  def initialize(map, position, heading)
+    @navigator = Navigator.new(map, position, heading)
   end
 
   def current_position

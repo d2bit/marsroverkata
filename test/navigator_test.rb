@@ -1,12 +1,14 @@
 require 'minitest/autorun'
 require './lib/navigator.rb'
 require './lib/point.rb'
+require './lib/map.rb'
 
 describe Navigator do
   before do
+    map = Map.new(Point.new(5, 5))
     @initial_position = Point.new(1, 2)
     @inicial_heading = Navigator::N
-    @subject = Navigator.new(@initial_position, @inicial_heading)
+    @subject = Navigator.new(map, @initial_position, @inicial_heading)
   end
 
   it 'knows its position' do
@@ -27,5 +29,11 @@ describe Navigator do
   it 'moves forward' do
     @subject.move_forward
     @subject.current_position.must_equal(Point.new(1, 3))
+  end
+
+  it 'raises an error if gets out of the map' do
+    @subject.turn_left
+    @subject.move_forward
+    -> { @subject.move_forward }.must_raise(Navigator::OutOfBoundsError)
   end
 end
