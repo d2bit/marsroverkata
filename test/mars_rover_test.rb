@@ -27,4 +27,15 @@ describe MarsRover do
       .move_forward
     @subject.current_position.must_equal(Point.new(1, 3))
   end
+
+  describe 'parses command' do
+    it 'moves the rover' do
+      @subject.parse_command('LMLMLMLMM')
+      @subject.current_position.must_equal(Point.new(1, 3))
+    end
+
+    it 'raises an exception if the command is INVALID' do
+      -> { @subject.parse_command('BUG') }.must_raise(MarsRover::InvalidCommandError)
+    end
+  end
 end
