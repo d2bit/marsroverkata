@@ -1,32 +1,30 @@
 require 'minitest/autorun'
 require './lib/mars_rover.rb'
 require './lib/point.rb'
-require './lib/nav.rb'
+require './lib/navigator.rb'
 
 describe MarsRover do
   before do
     @initial_position = Point.new(1, 2)
-    @inicial_heading = Nav::N
-    @mars_rover = MarsRover.new(@initial_position, @inicial_heading)
+    @inicial_heading = Navigator::N
+    @subject = MarsRover.new(@initial_position, @inicial_heading)
   end
 
-  it 'has a position' do
-    @mars_rover.current_position.must_equal(@initial_position)
+  it 'knows its position' do
+    @subject.current_position.must_equal(@initial_position)
   end
 
-  it 'turns left' do
-    @mars_rover.turn_left
-    @mars_rover.heading.must_equal(Nav::W)
+  it 'has a navigator' do
+    @subject.instance_variable_get(:@navigator).class.must_equal(Navigator)
   end
 
-  it 'turns right' do
-    @mars_rover.turn_right
-    @mars_rover.turn_right
-    @mars_rover.heading.must_equal(Nav::S)
-  end
-
-  it 'moves forward' do
-    @mars_rover.move
-    @mars_rover.current_position.must_equal(Point.new(1, 3))
+  it 'responds to orders' do
+    @subject
+      .turn_left.move_forward
+      .turn_left.move_forward
+      .turn_left.move_forward
+      .turn_left.move_forward
+      .move_forward
+    @subject.current_position.must_equal(Point.new(1, 3))
   end
 end

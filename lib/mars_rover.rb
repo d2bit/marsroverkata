@@ -1,29 +1,26 @@
-require './lib/nav.rb'
+require './lib/navigator.rb'
 
 class MarsRover
   def initialize(position, heading)
-    @position = position
-    @heading = heading
+    @navigator = Navigator.new(position, heading)
   end
 
   def current_position
-    @position
-  end
-
-  def heading
-    @heading
+    @navigator.current_position
   end
 
   def turn_left
-    @heading = Nav::DIRECTIONS[(@heading - 1) % 4]
+    @navigator.turn_left
+    self
   end
 
   def turn_right
-    @heading = Nav::DIRECTIONS[(@heading + 1) % 4]
+    @navigator.turn_right
+    self
   end
 
-  def move
-    diff = Nav::MOVES[@heading]
-    @position = Point.new(@position.x + diff[0], @position.y + diff[1])
+  def move_forward
+    @navigator.move_forward
+    self
   end
 end
